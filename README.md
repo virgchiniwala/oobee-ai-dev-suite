@@ -1,73 +1,147 @@
-# React + TypeScript + Vite
+# Oobee AI Dev Suite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, minimal web application prototype for the Oobee AI Dev Suite, extending the Oobee platform with development-focused tools and features.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Oobee AI Dev Suite is a React-based web application that provides a unified interface for AI-powered development tools. The application features a sidebar navigation system with multiple specialized views for different development workflows.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 18** - UI framework
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first styling
+- **React Router** - Client-side routing
 
-## Expanding the ESLint configuration
+## Design Philosophy
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The application follows Oobee's visual design principles:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Clean & Minimal** - No unnecessary elements or decorations
+- **Neutral Color Palette** - Light greys and white backgrounds
+- **Purple Accent** - `#6E56CF` used sparingly for active states and titles
+- **Functional First** - Clear labels and data-first approach
+- **No Animations** - Static, performance-focused UI
+- **Subtle Borders** - Clean separation with `border-gray-200`
+- **Ample White Space** - Breathing room for content
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Views
+
+1. **IDE View** (`/ide`)
+   - Development environment interface
+   - Default landing page
+
+2. **PR Review** (`/pr`)
+   - Pull request review interface
+   - Code review tools
+
+3. **Repo Settings** (`/settings`)
+   - Repository configuration
+   - Project settings management
+
+### Layout
+
+- **Fixed Sidebar** - 256px wide navigation panel
+- **Responsive Main Area** - Flexible content region
+- **Active State Highlighting** - Purple accent on current route
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/virgchiniwala/oobee-ai-dev-suite.git
+
+# Navigate to project directory
+cd oobee-ai-dev-suite
+
+# Install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Start development server
+npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Open http://localhost:5173
 ```
+
+### Build
+
+```bash
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Project Structure
+
+```
+oobee-ai-dev-suite/
+├── src/
+│   ├── components/
+│   │   └── Layout.tsx          # Main layout with sidebar
+│   ├── views/
+│   │   ├── IdeView.tsx         # IDE view component
+│   │   ├── PrReview.tsx        # PR review component
+│   │   └── RepoSettings.tsx    # Settings component
+│   ├── App.tsx                 # Router configuration
+│   ├── main.tsx                # Application entry point
+│   └── index.css               # Tailwind imports & base styles
+├── public/                     # Static assets
+├── tailwind.config.js          # Tailwind configuration
+├── vite.config.ts              # Vite configuration
+└── tsconfig.json               # TypeScript configuration
+```
+
+## Configuration
+
+### Tailwind CSS
+
+The Tailwind configuration includes the Oobee purple accent color:
+
+```javascript
+colors: {
+  purple: {
+    accent: '#6E56CF',
+  },
+}
+```
+
+### Routing
+
+Routes are configured in `App.tsx`:
+- `/` redirects to `/ide`
+- `/ide` - IDE View
+- `/pr` - PR Review
+- `/settings` - Repo Settings
+
+## Development Workflow
+
+This project follows a PR-based workflow:
+- All changes are made in feature branches
+- Pull requests are created for review before merging to main
+- README is kept up-to-date with project changes
+
+## Browser Support
+
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+
+## License
+
+MIT
