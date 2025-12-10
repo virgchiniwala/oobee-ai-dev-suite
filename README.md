@@ -1,180 +1,137 @@
 # Oobee AI Dev Suite
 
-A clean, minimal web application prototype for the Oobee AI Dev Suite, extending the Oobee platform with development-focused tools and features.
+A prototype interface exploring how accessibility checks and fix suggestions could appear inside developer workflows.  
+This is a front-end only prototype used to model IDE checks, PR suggestions, and repo-level settings.
 
 ## Overview
 
-Oobee AI Dev Suite is a React-based web application that provides a unified interface for AI-powered development tools. The application features a sidebar navigation system with multiple specialized views for different development workflows.
+The project visualises how an **Oobee developer-focused tool** might behave inside IDEs, pull requests, and CI/CD workflows.  
+It mirrors the visual style used in Oobee Web and Inspect Plus: neutral greys, structured layouts, sparse use of the Oobee purple accent (`#6E56CF`).
+
+There is **no backend**, no axe-core integration, and all data is static.  
+The goal is to evaluate interactions and layout—not functionality.
 
 ## Tech Stack
 
-- **React 18** - UI framework
-- **TypeScript** - Type-safe development
-- **Vite** - Fast build tool and dev server
-- **Tailwind CSS** - Utility-first styling
-- **React Router** - Client-side routing
+- React 18  
+- TypeScript  
+- Vite  
+- Tailwind CSS  
+- React Router  
 
-## Design Philosophy
+## Design Notes
 
-The application follows Oobee's visual design principles:
+The prototype follows Oobee’s design language:
 
-- **Clean & Minimal** - No unnecessary elements or decorations
-- **Neutral Color Palette** - Light greys and white backgrounds
-- **Purple Accent** - `#6E56CF` used sparingly for active states and titles
-- **Functional First** - Clear labels and data-first approach
-- **No Animations** - Static, performance-focused UI
-- **Subtle Borders** - Clean separation with `border-gray-200`
-- **Ample White Space** - Breathing room for content
+- Neutral greys and white backgrounds  
+- Subtle borders, clear spacing  
+- Purple accent `#6E56CF` for active states  
+- Monospace fonts only for code/diff sections  
+- No animation or decorative elements  
 
-## Features
+## Prototype Views
 
-### Views
+### 1. IDE View (`/ide`)
 
-1. **IDE View** (`/ide`)
-   - Development environment interface with inline accessibility checks
-   - Default landing page
-   - Two-column split layout:
-     - **Left: Code Editor** - Mock code editor displaying React/TypeScript files with line numbers and syntax highlighting for flagged lines
-     - **Right: Findings Panel** - List of accessibility issues with severity filters (All, Must-fix, Warning)
-   - **Finding Cards** - Each finding displays:
-     - Severity badge (Must-fix or Warning)
-     - Issue description
-     - WCAG reference
-     - Code location with line number
-     - Action buttons: "Preview fix" and "Ignore with reason..."
-   - **Preview Fix Modal** - Shows before/after code comparison with axe-core validation status
-   - Static fixture data demonstrating the interface without real scanning
+A mock “editor” showing how inline accessibility checks could surface.
 
-2. **PR Review** (`/pr`)
-   - Pull request review interface with diff-based accessibility checks
-   - **Top Bar** - PR title, number, status badge, and scan type
-   - Two-column split layout:
-     - **Left: Diff Viewer** - GitHub-style diff display with line numbers (old/new), additions (green), removals (red), and inline badges for issues
-     - **Right: Suggested Fixes Panel** - axe-core validated fix suggestions
-   - **Suggested Fix Cards** - Each suggestion displays:
-     - Severity badge and WCAG reference
-     - Issue description with code location
-     - Before/after code snippets
-     - axe-core validation status
-     - Action buttons: "Accept suggestion" and "Edit before applying"
-   - **Interactive State** - Accepting suggestions updates local state (pending/accepted)
-   - Static fixture data demonstrating PR review workflow
+- Two-column layout:  
+  - **Left:** static code editor with highlighted lines  
+  - **Right:** list of accessibility findings with severity filters  
+- Finding cards include:  
+  - severity  
+  - description  
+  - WCAG reference  
+  - code location  
+  - actions (“Preview fix”, “Ignore…”)  
+- “Preview fix” modal shows before/after snippets and a static validation message  
+- Data from `fixtures/ideFindings.ts`
 
-3. **Repo Settings** (`/settings`)
-   - Repository configuration
-   - Project settings management
+### 2. PR Review (`/pr`)
 
-### Layout
+A pull request mock with diff-based accessibility checks.
 
-- **Fixed Sidebar** - 256px wide navigation panel
-- **Responsive Main Area** - Flexible content region
-- **Active State Highlighting** - Purple accent on current route
+- **Left:** simplified GitHub-style diff (additions/removals, inline badges)  
+- **Right:** suggested fix cards  
+- Suggestions contain:  
+  - severity + WCAG clause  
+  - before/after code  
+  - validation line  
+  - accept/edit buttons  
+- Accepting a suggestion updates local state  
+- Data from `fixtures/prFindings.ts`
+
+### 3. Repo Settings (`/settings`)
+
+A mock configuration page for a repository.
+
+- framework selection  
+- IDE/PR/CI toggles  
+- report-only vs blocking modes  
+- severity gates  
+- telemetry notice  
+- live JSON showing the current config state  
+
+## Layout
+
+- Fixed left sidebar for navigation  
+- Right-side content panel for views  
+- Active nav item highlighted using the Oobee purple accent  
 
 ## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
 
 ### Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/virgchiniwala/oobee-ai-dev-suite.git
-
-# Navigate to project directory
 cd oobee-ai-dev-suite
-
-# Install dependencies
 npm install
 ```
 
 ### Development
-
-```bash
-# Start development server
+```
 npm run dev
-
-# Open http://localhost:5173
+open http://localhost:5173
 ```
 
 ### Build
-
-```bash
-# Build for production
+```
 npm run build
-
-# Preview production build
 npm run preview
 ```
 
-## Project Structure
-
-```
-oobee-ai-dev-suite/
-├── src/
-│   ├── components/
-│   │   ├── Layout.tsx              # Main layout with sidebar
-│   │   ├── CodeEditor.tsx          # Mock code editor component
-│   │   ├── FindingsPanel.tsx       # Accessibility findings panel
-│   │   ├── FindingCard.tsx         # Individual finding card
-│   │   ├── PreviewFixModal.tsx     # Fix preview modal dialog
-│   │   ├── PrTopBar.tsx            # PR review top bar
-│   │   ├── DiffViewer.tsx          # Git diff viewer component
-│   │   ├── SuggestedFixCard.tsx    # PR suggestion card
-│   │   └── SuggestedFixesPanel.tsx # PR suggestions panel
-│   ├── views/
-│   │   ├── IdeView.tsx         # IDE view component
-│   │   ├── PrReview.tsx        # PR review component
-│   │   └── RepoSettings.tsx    # Settings component
-│   ├── fixtures/
-│   │   ├── ideFindings.ts      # Mock data for IDE view
-│   │   └── prFindings.ts       # Mock data for PR review
-│   ├── App.tsx                 # Router configuration
-│   ├── main.tsx                # Application entry point
-│   └── index.css               # Tailwind imports & base styles
-├── public/                     # Static assets
-├── tailwind.config.js          # Tailwind configuration
-├── vite.config.ts              # Vite configuration
-└── tsconfig.json               # TypeScript configuration
-```
-
 ## Configuration
-
-### Tailwind CSS
-
-The Tailwind configuration includes the Oobee purple accent color:
-
-```javascript
-colors: {
-  purple: {
-    accent: '#6E56CF',
-  },
-}
-```
-
 ### Routing
 
-Routes are configured in `App.tsx`:
-- `/` redirects to `/ide`
-- `/ide` - IDE View
-- `/pr` - PR Review
-- `/settings` - Repo Settings
+Defined in ```App.tsx```:
+```/``` → redirects to ```/ide```
 
-## Development Workflow
+```/ide``` → ```IDE View```
 
-This project follows a PR-based workflow:
-- All changes are made in feature branches
-- Pull requests are created for review before merging to main
-- README is kept up-to-date with project changes
+```/pr``` → ```PR Review```
 
-## Browser Support
+```/settings``` → ```Repo Settings```
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
+### Intended Use
 
-## License
+This repository is meant for:
+
+Exploring UI flows for developer-side accessibility tooling
+
+Sharing with product, engineering, and design teams
+
+Testing layouts and interactions before building actual integrations
+
+This is not a functional accessibility scanner.
+
+### Browser Support
+
+Chrome / Edge (latest)
+
+Firefox (latest)
+
+Safari (latest)
+
+### License
 
 MIT
