@@ -46,8 +46,19 @@ The application follows Oobee's visual design principles:
    - Static fixture data demonstrating the interface without real scanning
 
 2. **PR Review** (`/pr`)
-   - Pull request review interface
-   - Code review tools
+   - Pull request review interface with diff-based accessibility checks
+   - **Top Bar** - PR title, number, status badge, and scan type
+   - Two-column split layout:
+     - **Left: Diff Viewer** - GitHub-style diff display with line numbers (old/new), additions (green), removals (red), and inline badges for issues
+     - **Right: Suggested Fixes Panel** - axe-core validated fix suggestions
+   - **Suggested Fix Cards** - Each suggestion displays:
+     - Severity badge and WCAG reference
+     - Issue description with code location
+     - Before/after code snippets
+     - axe-core validation status
+     - Action buttons: "Accept suggestion" and "Edit before applying"
+   - **Interactive State** - Accepting suggestions updates local state (pending/accepted)
+   - Static fixture data demonstrating PR review workflow
 
 3. **Repo Settings** (`/settings`)
    - Repository configuration
@@ -104,17 +115,22 @@ npm run preview
 oobee-ai-dev-suite/
 ├── src/
 │   ├── components/
-│   │   ├── Layout.tsx          # Main layout with sidebar
-│   │   ├── CodeEditor.tsx      # Mock code editor component
-│   │   ├── FindingsPanel.tsx   # Accessibility findings panel
-│   │   ├── FindingCard.tsx     # Individual finding card
-│   │   └── PreviewFixModal.tsx # Fix preview modal dialog
+│   │   ├── Layout.tsx              # Main layout with sidebar
+│   │   ├── CodeEditor.tsx          # Mock code editor component
+│   │   ├── FindingsPanel.tsx       # Accessibility findings panel
+│   │   ├── FindingCard.tsx         # Individual finding card
+│   │   ├── PreviewFixModal.tsx     # Fix preview modal dialog
+│   │   ├── PrTopBar.tsx            # PR review top bar
+│   │   ├── DiffViewer.tsx          # Git diff viewer component
+│   │   ├── SuggestedFixCard.tsx    # PR suggestion card
+│   │   └── SuggestedFixesPanel.tsx # PR suggestions panel
 │   ├── views/
 │   │   ├── IdeView.tsx         # IDE view component
 │   │   ├── PrReview.tsx        # PR review component
 │   │   └── RepoSettings.tsx    # Settings component
 │   ├── fixtures/
-│   │   └── ideFindings.ts      # Mock data for IDE view
+│   │   ├── ideFindings.ts      # Mock data for IDE view
+│   │   └── prFindings.ts       # Mock data for PR review
 │   ├── App.tsx                 # Router configuration
 │   ├── main.tsx                # Application entry point
 │   └── index.css               # Tailwind imports & base styles
