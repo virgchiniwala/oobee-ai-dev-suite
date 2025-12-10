@@ -31,8 +31,19 @@ The application follows Oobee's visual design principles:
 ### Views
 
 1. **IDE View** (`/ide`)
-   - Development environment interface
+   - Development environment interface with inline accessibility checks
    - Default landing page
+   - Two-column split layout:
+     - **Left: Code Editor** - Mock code editor displaying React/TypeScript files with line numbers and syntax highlighting for flagged lines
+     - **Right: Findings Panel** - List of accessibility issues with severity filters (All, Must-fix, Warning)
+   - **Finding Cards** - Each finding displays:
+     - Severity badge (Must-fix or Warning)
+     - Issue description
+     - WCAG reference
+     - Code location with line number
+     - Action buttons: "Preview fix" and "Ignore with reason..."
+   - **Preview Fix Modal** - Shows before/after code comparison with axe-core validation status
+   - Static fixture data demonstrating the interface without real scanning
 
 2. **PR Review** (`/pr`)
    - Pull request review interface
@@ -93,11 +104,17 @@ npm run preview
 oobee-ai-dev-suite/
 ├── src/
 │   ├── components/
-│   │   └── Layout.tsx          # Main layout with sidebar
+│   │   ├── Layout.tsx          # Main layout with sidebar
+│   │   ├── CodeEditor.tsx      # Mock code editor component
+│   │   ├── FindingsPanel.tsx   # Accessibility findings panel
+│   │   ├── FindingCard.tsx     # Individual finding card
+│   │   └── PreviewFixModal.tsx # Fix preview modal dialog
 │   ├── views/
 │   │   ├── IdeView.tsx         # IDE view component
 │   │   ├── PrReview.tsx        # PR review component
 │   │   └── RepoSettings.tsx    # Settings component
+│   ├── fixtures/
+│   │   └── ideFindings.ts      # Mock data for IDE view
 │   ├── App.tsx                 # Router configuration
 │   ├── main.tsx                # Application entry point
 │   └── index.css               # Tailwind imports & base styles
