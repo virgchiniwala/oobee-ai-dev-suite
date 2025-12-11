@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import Breadcrumb from '../components/Breadcrumb';
 import SettingsSection from '../components/SettingsSection';
+import SectionHeader from '../components/SectionHeader';
 import Checkbox from '../components/Checkbox';
 import Toggle from '../components/Toggle';
 import RadioGroup from '../components/RadioGroup';
@@ -99,11 +101,14 @@ export default function RepoSettings() {
 
   return (
     <div className="h-full overflow-auto bg-white">
+      <Breadcrumb viewName="Repo Settings" />
+
       <div className="max-w-4xl mx-auto p-8">
         {/* Page Title */}
-        <h1 className="text-2xl font-semibold text-gray-900 mb-8">
+        <SectionHeader level={1}>
           Repo settings – stats.mom.gov.sg
-        </h1>
+        </SectionHeader>
+        <div className="h-6" />
 
         {/* Section 1: Scan Configuration */}
         <SettingsSection title="Scan configuration">
@@ -236,8 +241,8 @@ export default function RepoSettings() {
 
         {/* Section 4: Debug Panel */}
         <div>
-          <h2 className="text-base font-semibold text-gray-900 mb-4">Debug panel</h2>
-          <div className="p-4 bg-gray-50 border border-gray-200 font-mono text-xs overflow-auto">
+          <SectionHeader level={2}>Debug panel</SectionHeader>
+          <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg font-mono text-xs overflow-auto mt-4">
             <pre className="text-gray-900">{JSON.stringify(config, null, 2)}</pre>
           </div>
         </div>

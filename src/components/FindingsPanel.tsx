@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { Finding, Severity } from '../fixtures/ideFindings';
 import FindingCard from './FindingCard';
+import PillToggle from './PillToggle';
+import SectionHeader from './SectionHeader';
 
 interface FindingsPanelProps {
   findings: Finding[];
@@ -26,25 +28,18 @@ export default function FindingsPanel({ findings, onPreviewFix }: FindingsPanelP
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          Inline accessibility checks
-        </h2>
+      <div className="px-6 py-6 border-b border-gray-200">
+        <SectionHeader level={2}>Inline accessibility checks</SectionHeader>
 
         {/* Severity Filters */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-4">
           {filters.map((filter) => (
-            <button
+            <PillToggle
               key={filter.value}
+              label={filter.label}
+              active={activeFilter === filter.value}
               onClick={() => setActiveFilter(filter.value)}
-              className={`px-3 py-1.5 text-sm font-medium border ${
-                activeFilter === filter.value
-                  ? 'bg-[#6E56CF] text-white border-[#6E56CF]'
-                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-              }`}
-            >
-              {filter.label}
-            </button>
+            />
           ))}
         </div>
       </div>

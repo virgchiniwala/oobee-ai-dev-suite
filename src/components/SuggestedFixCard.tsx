@@ -1,4 +1,7 @@
 import type { PrSuggestion } from '../fixtures/prFindings';
+import Card from './Card';
+import Badge from './Badge';
+import CodeBlock from './CodeBlock';
 
 interface SuggestedFixCardProps {
   suggestion: PrSuggestion;
@@ -11,20 +14,10 @@ export default function SuggestedFixCard({
   onAccept,
   onEdit,
 }: SuggestedFixCardProps) {
-  const severityColors = {
-    'must-fix': 'bg-red-50 text-red-700 border-red-200',
-    'warning': 'bg-yellow-50 text-yellow-700 border-yellow-200',
-  };
-
-  const severityLabels = {
-    'must-fix': 'Must-fix',
-    'warning': 'Warning',
-  };
-
   const statusDisplay = {
     pending: null,
     accepted: (
-      <div className="flex items-center gap-2 mt-3 p-2 bg-green-50 border border-green-200">
+      <div className="flex items-center gap-2 mt-3 p-2 bg-green-50 border border-green-200 rounded">
         <svg
           className="w-4 h-4 text-green-600"
           fill="none"
@@ -42,23 +35,17 @@ export default function SuggestedFixCard({
       </div>
     ),
     rejected: (
-      <div className="flex items-center gap-2 mt-3 p-2 bg-gray-50 border border-gray-200">
+      <div className="flex items-center gap-2 mt-3 p-2 bg-gray-50 border border-gray-200 rounded">
         <span className="text-xs font-medium text-gray-700">Rejected</span>
       </div>
     ),
   };
 
   return (
-    <div className="p-4 bg-white border border-gray-200">
+    <Card>
       {/* Header */}
       <div className="flex items-center gap-2 mb-3">
-        <span
-          className={`inline-block px-2 py-1 text-xs font-medium border ${
-            severityColors[suggestion.severity]
-          }`}
-        >
-          {severityLabels[suggestion.severity]}
-        </span>
+        <Badge severity={suggestion.severity} />
         <span className="text-xs text-gray-500">{suggestion.wcagReference}</span>
       </div>
 
@@ -77,21 +64,17 @@ export default function SuggestedFixCard({
         {/* Before */}
         <div>
           <p className="text-xs text-gray-600 mb-1">Before</p>
-          <div className="p-3 bg-red-50 border border-red-200 font-mono text-xs text-gray-900">
-            <pre className="whitespace-pre-wrap">{suggestion.beforeCode}</pre>
-          </div>
+          <CodeBlock code={suggestion.beforeCode} variant="removed" />
         </div>
 
         {/* After */}
         <div>
           <p className="text-xs text-gray-600 mb-1">After</p>
-          <div className="p-3 bg-green-50 border border-green-200 font-mono text-xs text-gray-900">
-            <pre className="whitespace-pre-wrap">{suggestion.afterCode}</pre>
-          </div>
+          <CodeBlock code={suggestion.afterCode} variant="added" />
         </div>
 
         {/* Validation */}
-        <div className="flex items-center gap-2 p-2 bg-green-50 border border-green-200">
+        <div className="flex items-center gap-2 p-2 bg-green-50 border border-green-200 rounded">
           <svg
             className="w-4 h-4 text-green-600"
             fill="none"
@@ -116,13 +99,13 @@ export default function SuggestedFixCard({
         <div className="flex gap-2 mt-4">
           <button
             onClick={() => onAccept(suggestion.id)}
-            className="px-3 py-1.5 text-xs font-medium text-white bg-[#6E56CF] hover:bg-[#5d47b8]"
+            className="px-3 py-1.5 text-xs font-medium text-white bg-[#6E56CF] hover:bg-[#5d47b8] rounded"
           >
             Accept suggestion
           </button>
           <button
             onClick={() => onEdit(suggestion.id)}
-            className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
+            className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 rounded"
           >
             Edit before applying
           </button>
@@ -130,6 +113,6 @@ export default function SuggestedFixCard({
       ) : (
         statusDisplay[suggestion.status]
       )}
-    </div>
+    </Card>
   );
 }

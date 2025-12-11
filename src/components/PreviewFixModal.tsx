@@ -1,4 +1,6 @@
 import type { Finding } from '../fixtures/ideFindings';
+import CodeBlock from './CodeBlock';
+import SectionHeader from './SectionHeader';
 
 interface PreviewFixModalProps {
   finding: Finding | null;
@@ -14,13 +16,13 @@ export default function PreviewFixModal({ finding, onClose }: PreviewFixModalPro
       onClick={onClose}
     >
       <div
-        className="w-full max-w-3xl max-h-[90vh] overflow-auto bg-white border border-gray-200"
+        className="w-full max-w-3xl max-h-[90vh] overflow-auto bg-white border border-gray-200 rounded-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gray-50">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Preview fix</h2>
+            <SectionHeader level={2}>Preview fix</SectionHeader>
             <p className="text-sm text-gray-600 mt-1">{finding.description}</p>
           </div>
           <button
@@ -45,30 +47,26 @@ export default function PreviewFixModal({ finding, onClose }: PreviewFixModalPro
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-6 space-y-6">
           {/* Before */}
-          <div className="mb-6">
+          <div>
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium text-gray-900">Before</h3>
               <span className="text-xs text-gray-500 font-mono">
                 {finding.location}
               </span>
             </div>
-            <div className="p-4 bg-gray-50 border border-gray-200 font-mono text-sm text-gray-900">
-              <pre className="whitespace-pre-wrap">{finding.beforeCode}</pre>
-            </div>
+            <CodeBlock code={finding.beforeCode} variant="removed" />
           </div>
 
           {/* After */}
-          <div className="mb-6">
+          <div>
             <h3 className="text-sm font-medium text-gray-900 mb-2">After</h3>
-            <div className="p-4 bg-green-50 border border-green-200 font-mono text-sm text-gray-900">
-              <pre className="whitespace-pre-wrap">{finding.afterCode}</pre>
-            </div>
+            <CodeBlock code={finding.afterCode} variant="added" />
           </div>
 
           {/* Axe-core Status */}
-          <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200">
+          <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded">
             <svg
               className="w-5 h-5 text-green-600"
               fill="none"
@@ -92,11 +90,11 @@ export default function PreviewFixModal({ finding, onClose }: PreviewFixModalPro
         <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 rounded"
           >
             Cancel
           </button>
-          <button className="px-4 py-2 text-sm font-medium text-white bg-[#6E56CF] hover:bg-[#5d47b8]">
+          <button className="px-4 py-2 text-sm font-medium text-white bg-[#6E56CF] hover:bg-[#5d47b8] rounded">
             Apply fix
           </button>
         </div>
