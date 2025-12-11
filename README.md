@@ -3,6 +3,12 @@
 A prototype interface exploring how accessibility checks and fix suggestions could appear inside developer workflows.  
 This is a front-end only prototype used to model IDE checks, PR suggestions, and repo-level settings.
 
+## Context
+
+Oobee is an automated accessibility testing platform open to use for anyone building digital services.
+This prototype explores how Oobee could extend into developer workflows (IDE, PRs, CI/CD) 
+as an “Oobee AI Dev Suite”.
+
 ## Overview
 
 The project visualises how an **Oobee developer-focused tool** might behave inside IDEs, pull requests, and CI/CD workflows.  
@@ -122,6 +128,7 @@ Defined in ```App.tsx```:
 ### Intended Use
 
 This repository is meant for:
+This prototype is not a committed roadmap; it is a v0 UX exploration for discussion.
 
 Exploring UI flows for developer-side accessibility tooling
 
