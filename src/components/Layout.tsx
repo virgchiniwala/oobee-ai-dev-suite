@@ -24,7 +24,7 @@ export default function Layout() {
             <NavLink
               to="/ide"
               className={({ isActive }) =>
-                `block px-3 py-2 text-sm font-medium ${
+                `block px-3 py-2 text-sm font-medium rounded ${
                   isActive
                     ? 'bg-purple-50 text-[#6E56CF]'
                     : 'text-gray-700 hover:bg-gray-100'
@@ -37,7 +37,7 @@ export default function Layout() {
             <NavLink
               to="/pr"
               className={({ isActive }) =>
-                `block px-3 py-2 text-sm font-medium ${
+                `block px-3 py-2 text-sm font-medium rounded ${
                   isActive
                     ? 'bg-purple-50 text-[#6E56CF]'
                     : 'text-gray-700 hover:bg-gray-100'
@@ -50,7 +50,7 @@ export default function Layout() {
             <NavLink
               to="/settings"
               className={({ isActive }) =>
-                `block px-3 py-2 text-sm font-medium ${
+                `block px-3 py-2 text-sm font-medium rounded ${
                   isActive
                     ? 'bg-purple-50 text-[#6E56CF]'
                     : 'text-gray-700 hover:bg-gray-100'
@@ -64,7 +64,7 @@ export default function Layout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto bg-gray-50">
         <Outlet />
       </main>
     </div>

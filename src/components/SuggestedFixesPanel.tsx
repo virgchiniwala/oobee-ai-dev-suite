@@ -1,5 +1,6 @@
 import type { PrSuggestion } from '../fixtures/prFindings';
 import SuggestedFixCard from './SuggestedFixCard';
+import SectionHeader from './SectionHeader';
 
 interface SuggestedFixesPanelProps {
   suggestions: PrSuggestion[];
@@ -18,10 +19,10 @@ export default function SuggestedFixesPanel({
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-900">
+      <div className="px-6 py-6 border-b border-gray-200">
+        <SectionHeader level={2}>
           Suggested fixes (axe-core validated)
-        </h2>
+        </SectionHeader>
       </div>
 
       {/* Suggestions List */}

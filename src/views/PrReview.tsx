@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Breadcrumb from '../components/Breadcrumb';
 import PrTopBar from '../components/PrTopBar';
 import DiffViewer from '../components/DiffViewer';
 import SuggestedFixesPanel from '../components/SuggestedFixesPanel';
@@ -20,7 +21,9 @@ export default function PrReview() {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-white">
+      <Breadcrumb viewName="PR Review" />
+
       {/* Top Bar */}
       <PrTopBar
         prNumber={prMetadata.number}
