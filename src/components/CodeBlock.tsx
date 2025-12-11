@@ -1,14 +1,13 @@
 interface CodeBlockProps {
   code: string;
-  language?: string;
   variant?: 'default' | 'removed' | 'added';
 }
 
 export default function CodeBlock({ code, variant = 'default' }: CodeBlockProps) {
   const backgrounds = {
     default: 'bg-gray-50',
-    removed: 'bg-red-50',
-    added: 'bg-green-50',
+    removed: 'bg-red-100',
+    added: 'bg-[#DCFCE7]',
   };
 
   const borders = {

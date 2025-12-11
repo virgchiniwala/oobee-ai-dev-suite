@@ -1,4 +1,5 @@
 import type { DiffLine } from '../fixtures/prFindings';
+import Badge from './Badge';
 
 interface DiffViewerProps {
   fileName: string;
@@ -67,14 +68,8 @@ export default function DiffViewer({ fileName, diffLines }: DiffViewerProps) {
 
               {/* Badge */}
               {line.badge && (
-                <span
-                  className={`inline-flex items-center mx-2 my-1 px-2 py-0.5 text-xs font-medium border ${
-                    line.badge.severity === 'must-fix'
-                      ? 'bg-red-50 text-red-700 border-red-200'
-                      : 'bg-yellow-50 text-yellow-700 border-yellow-200'
-                  }`}
-                >
-                  {line.badge.text}
+                <span className="mx-2 my-1">
+                  <Badge severity={line.badge.severity} label={line.badge.text} />
                 </span>
               )}
             </div>

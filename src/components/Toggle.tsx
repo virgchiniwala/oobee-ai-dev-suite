@@ -17,12 +17,12 @@ export default function Toggle({ label, description, checked, onChange }: Toggle
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative inline-flex h-6 w-11 flex-shrink-0 border-2 border-transparent ${
+        className={`relative inline-flex h-6 w-11 flex-shrink-0 border-2 border-transparent rounded-full ${
           checked ? 'bg-[#6E56CF]' : 'bg-gray-200'
         }`}
       >
         <span
-          className={`inline-block h-5 w-5 bg-white ${
+          className={`inline-block h-5 w-5 bg-white rounded-full ${
             checked ? 'translate-x-5' : 'translate-x-0'
           }`}
         />
