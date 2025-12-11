@@ -63,14 +63,21 @@ A pull request mock with diff-based accessibility checks.
 
 ### 3. Repo Settings (`/settings`)
 
-A mock configuration page for a repository.
+A mock configuration page for repository-level settings.
 
-- framework selection  
-- IDE/PR/CI toggles  
-- report-only vs blocking modes  
-- severity gates  
-- telemetry notice  
-- live JSON showing the current config state  
+- **Scan configuration:**
+  - Multi-select framework detection (React, Angular, Plain HTML, Other)
+  - Feature toggles for IDE checks, PR checks, CI jobs
+- **Gates & policies:**
+  - Mode selection (Report-only vs Blocking on must-fix)
+  - Severity filters (Must-fix, Warning)
+  - Live summary line reflecting current config
+- **Telemetry & data:**
+  - Privacy notice about code and data usage
+  - Toggle for anonymous usage metrics
+- **Debug panel:**
+  - Live JSON display of current config state
+- All settings stored in local React state only  
 
 ## Layout
 
