@@ -12,7 +12,7 @@ export default function PrTopBar({ prNumber, title, status, scanType }: PrTopBar
         <h1 className="text-xl font-semibold text-gray-900">
           PR #{prNumber} – {title}
         </h1>
-        <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-white bg-[#6E56CF] border border-[#6E56CF]">
+        <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-white bg-[#6E56CF] border border-[#6E56CF] rounded">
           Checks: {status}
         </span>
       </div>

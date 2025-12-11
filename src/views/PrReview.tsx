@@ -15,9 +15,8 @@ export default function PrReview() {
     );
   };
 
-  const handleEdit = (id: string) => {
+  const handleEdit = (_id: string) => {
     // In a real app, this would open an editor
-    console.log('Edit suggestion:', id);
   };
 
   return (
